@@ -8,15 +8,14 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 /**
  * @OA\Schema(
- *     schema="ProductRequest",
+ *     schema="CourseRequest",
  *     type="object",
- *     required={"name", "category_id", "status", "quantity", "price", "weight"},
+ *     required={"title", "category_id", "status", "quantity", "price", "weight"},
  *     @OA\Property(property="title", type="string", example="Web Development", description="Unique product name"),
  *     @OA\Property(property="category_id", type="integer", example=1, description="Must exist in the categories table"),
  *     @OA\Property(property="status", type="integer", enum={0,1}, example=1, description="0 for inactive, 1 for active"),
  *     @OA\Property(property="is_approved", type="integer", enum={0,1}, example=50, description="0 for notapproved, 1 for approved"),
- *     @OA\Property(property="svp_points", type="integer", nullable=true, example=10, description="SVP points, optional"),
- *     @OA\Property(property="price", type="number", format="float", example=299.99, description="Product price"),
+ *     @OA\Property(property="price", type="number", format="float", example=299.99, description="Course price"),
  *     @OA\Property(property="weight", type="string", example="500g", description="Product weight"),
  * )
  */

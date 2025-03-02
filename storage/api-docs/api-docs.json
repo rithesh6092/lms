@@ -271,74 +271,6 @@
                 ]
             }
         },
-        "/api/v1/courses": {
-            "get": {
-                "tags": [
-                    "Courses"
-                ],
-                "summary": "Get all Courses",
-                "description": "Fetches a list of all available courses",
-                "operationId": "getCourses",
-                "responses": {
-                    "200": {
-                        "description": "Products Fetched Successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Products Fetched Successfully"
-                                        },
-                                        "status": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Something went wrong"
-                                        },
-                                        "status": {
-                                            "type": "integer",
-                                            "example": 500
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthenticated"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/api/v1/admin/instructors": {
             "get": {
                 "tags": [
@@ -989,6 +921,513 @@
                 ]
             }
         },
+        "/api/v1/courses": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get all Courses",
+                "description": "Fetches a list of all available courses",
+                "operationId": "getCourses",
+                "responses": {
+                    "200": {
+                        "description": "Products Fetched Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Products Fetched Successfully"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something went wrong"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Create a new course",
+                "description": "Creates a new course with the provided details",
+                "operationId": "storeCourse",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Full Stack Web Development"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Learn full stack web development from scratch"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 99.99
+                                    },
+                                    "duration": {
+                                        "type": "string",
+                                        "example": "6 months"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Course Created Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Course Created Successfully"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Full Stack Web Development"
+                                                },
+                                                "slug": {
+                                                    "type": "string",
+                                                    "example": "full-stack-web-development"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "datetime"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "datetime"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/courses/{id}": {
+            "put": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Update an existing course",
+                "description": "Updates a course with the provided details",
+                "operationId": "updateCourse",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the course to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Updated Full Stack Web Development"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Updated course description"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 149.99
+                                    },
+                                    "duration": {
+                                        "type": "string",
+                                        "example": "8 months"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Course Updated Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Course Updated Successfully"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Updated Full Stack Web Development"
+                                                },
+                                                "slug": {
+                                                    "type": "string",
+                                                    "example": "updated-full-stack-web-development"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "datetime"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "datetime"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Course not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Course not found"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/jobs": {
+            "get": {
+                "tags": [
+                    "Jobs"
+                ],
+                "summary": "Get all Jobs",
+                "description": "Fetches a list of all available jobs",
+                "operationId": "getJobs",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter jobs by status",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "active",
+                                "inactive",
+                                "expired"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Jobs Fetched Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Jobs Fetched Successfully"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "title": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "link": {
+                                                        "type": "string"
+                                                    },
+                                                    "company_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "application_start_date": {
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    },
+                                                    "application_end_date": {
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "datetime"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "datetime"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Jobs"
+                ],
+                "summary": "Create a new job posting",
+                "description": "Creates a new job posting with the provided details",
+                "operationId": "storeJob",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "link",
+                                    "company_name",
+                                    "application_start_date",
+                                    "application_end_date"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Senior Full Stack Developer"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "We are looking for an experienced Full Stack Developer..."
+                                    },
+                                    "link": {
+                                        "type": "string",
+                                        "example": "https://company.com/careers/senior-dev"
+                                    },
+                                    "company_name": {
+                                        "type": "string",
+                                        "example": "Tech Corp Ltd"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "enum": [
+                                            "active",
+                                            "inactive",
+                                            "expired"
+                                        ],
+                                        "example": "active"
+                                    },
+                                    "application_start_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-03-02"
+                                    },
+                                    "application_end_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-04-02"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Job Created Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Job Created Successfully"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/student": {
             "post": {
                 "tags": [
@@ -1129,6 +1568,58 @@
     },
     "components": {
         "schemas": {
+            "CourseRequest": {
+                "required": [
+                    "title",
+                    "category_id",
+                    "status",
+                    "quantity",
+                    "price",
+                    "weight"
+                ],
+                "properties": {
+                    "title": {
+                        "description": "Unique product name",
+                        "type": "string",
+                        "example": "Web Development"
+                    },
+                    "category_id": {
+                        "description": "Must exist in the categories table",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "status": {
+                        "description": "0 for inactive, 1 for active",
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "example": 1
+                    },
+                    "is_approved": {
+                        "description": "0 for notapproved, 1 for approved",
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ],
+                        "example": 50
+                    },
+                    "price": {
+                        "description": "Course price",
+                        "type": "number",
+                        "format": "float",
+                        "example": 299.99
+                    },
+                    "weight": {
+                        "description": "Product weight",
+                        "type": "string",
+                        "example": "500g"
+                    }
+                },
+                "type": "object"
+            },
             "InstructorDetailResource": {
                 "title": "Instructor Detail",
                 "description": "Detailed information about an instructor",
@@ -1310,16 +1801,20 @@
             "description": "Course - Categories"
         },
         {
-            "name": "Courses",
-            "description": "Courses"
-        },
-        {
             "name": "Admin - Instructors",
             "description": "Admin - Instructors"
         },
         {
             "name": "Admin - Students",
             "description": "Admin - Students"
+        },
+        {
+            "name": "Courses",
+            "description": "Courses"
+        },
+        {
+            "name": "Jobs",
+            "description": "Jobs"
         },
         {
             "name": "Student",

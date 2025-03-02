@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\api\JobController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\api\CourseController;
 use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\StudentController as AdminStudentController;
 use Illuminate\Http\Request;
@@ -33,6 +34,7 @@ Route::name('api.')->group(function () {
     });
 
     Route::resource('courses', CourseController::class);
+    Route::apiResource('jobs', JobController::class);
 
     Route::middleware('auth:sanctum')->group(function () {
         // Route::prefix('admin')->group(function () { 

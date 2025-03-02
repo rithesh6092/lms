@@ -12,6 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('courses', function (Blueprint $table) {
+            // Drop foreign key constraints first
+            $table->dropForeign(['category_id']);
+            $table->dropForeign(['instructor_id']);
+            
+            // Then drop the columns
             $table->dropColumn(['instructor_id', 'category_id']);
         });
     }
@@ -24,6 +29,10 @@ return new class extends Migration
         Schema::table('courses', function (Blueprint $table) {
             $table->unsignedBigInteger('instructor_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
+            
+            // Recreate foreign key constraints
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('instructor_id')->references('id')->on('users');
         });
     }
 }; 
